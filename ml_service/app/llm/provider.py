@@ -35,6 +35,8 @@ class OpenAICompatibleProvider(LLMProvider):
         "openai": "https://api.openai.com/v1/chat/completions",
         "openrouter": "https://openrouter.ai/api/v1/chat/completions",
         "groq": "https://api.groq.com/openai/v1/chat/completions",
+        "grok": "https://api.x.ai/v1/chat/completions",
+        "xai": "https://api.x.ai/v1/chat/completions",
     }
 
     def __init__(self, provider: str, api_key: str, model: str):
