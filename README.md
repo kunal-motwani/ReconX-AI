@@ -3,6 +3,9 @@
 > **Autonomous 6-Agent Financial Reconciliation & SOX-404 Compliance Terminal**  
 > *Engineered for the HyperBloom UI/UX Hackathon & Enterprise FinOps*
 
+[![Watch Showcase Video](https://img.shields.io/badge/🎬_Watch_Showcase_Video-1080p_Voiceover_%26_Music-orange?style=for-the-badge)](https://github.com/kunal-motwani/ReconX-AI/releases/download/v1.0.0/ReconX_AI_Showcase_With_Commentary_And_Music.mp4)
+[![Release](https://img.shields.io/badge/Release-v1.0.0-green?style=flat-square)](https://github.com/kunal-motwani/ReconX-AI/releases/tag/v1.0.0)
+
 [![Next.js](https://img.shields.io/badge/Next.js-14_App_Router-black?style=flat-square&logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38bdf8?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
