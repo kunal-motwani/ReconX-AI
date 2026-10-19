@@ -1,0 +1,31 @@
+================================================================================
+                    INVOICE: AMAZON WEB SERVICES INDIA PVT LTD
+================================================================================
+Invoice Number  : AWS-IN-2026-98124
+Invoice Date    : 01-Sep-2026
+Due Date        : 15-Sep-2026
+GSTIN           : 27AAACA4231N1Z5
+PAN             : AAACA4231N
+
+Billed To:
+ABC Technologies Pvt Ltd
+2nd Floor, Cyber Heights, Bangalore 560001
+GSTIN: 29BBBCA8812K1Z9
+
+--------------------------------------------------------------------------------
+LINE ITEMS & DESCRIPTION                                   QTY   AMOUNT (INR)
+--------------------------------------------------------------------------------
+1. EC2 Compute Instances (us-east-1 / ap-south-1)           1    ₹85,000.00
+2. S3 Storage & Glacier Backup Archives                    1    ₹25,000.00
+3. RDS PostgreSQL Managed Cluster Node                     1    ₹15,000.00
+--------------------------------------------------------------------------------
+SUBTOTAL                                                        ₹1,25,000.00
+CGST @ 9%                                                       ₹11,250.00
+SGST @ 9%                                                       ₹11,250.00
+--------------------------------------------------------------------------------
+TOTAL INVOICE AMOUNT                                           ₹1,47,500.00
+TDS DEDUCTIBLE (Section 194Q @ 0.1%)                            ₹125.00
+NET PAYABLE TO VENDOR                                          ₹1,47,375.00
+--------------------------------------------------------------------------------
+Payment Instructions: Wire Transfer to HDFC Bank Acc # 50200018921209
+================================================================================

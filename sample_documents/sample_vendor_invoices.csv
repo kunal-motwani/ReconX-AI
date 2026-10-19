@@ -1,0 +1,6 @@
+Vendor Name,Invoice Number,Invoice Date,Due Date,Description,Quantity,Unit Price,Tax Rate,Total Amount,GL Code
+AWS Cloud Technologies,INV-2026-9042,2026-08-15,2026-09-15,Cloud Infrastructure & Compute EC2 Instances,1,125000.00,18%,147500.00,6001
+Google Cloud Services,INV-GCP-8831,2026-08-18,2026-09-18,Vertex AI API & Storage Credits,1,45000.00,18%,53100.00,6001
+Microsoft Corporation,INV-MSFT-1029,2026-08-20,2026-09-20,Microsoft 365 Enterprise Licenses (250 Seats),250,800.00,18%,236000.00,6002
+Deloitte Consulting,INV-DEL-3301,2026-08-22,2026-09-22,Q2 Financial Audit & Tax Compliance Retainer,1,350000.00,18%,413000.00,6003
+Slack Technologies,INV-SLK-4412,2026-08-25,2026-09-25,Enterprise Grid Chat Subscription,1,32000.00,18%,37760.00,6002

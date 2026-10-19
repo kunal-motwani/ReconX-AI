@@ -1,0 +1,27 @@
+================================================================================
+                         INVOICE - AWS CLOUD SERVICES
+================================================================================
+Vendor:             AWS Cloud Technologies India Pvt Ltd
+Vendor Address:     Level 14, Tower B, Cyber City, Gurugram, HR 122002
+Tax ID / GSTIN:     06AAAAA0000A1Z5
+
+Bill To:            ABC Technologies Pvt Ltd
+Invoice Number:     INV-2026-9042
+Invoice Date:       August 15, 2026
+Payment Terms:      Net 30 (Due September 15, 2026)
+
+--------------------------------------------------------------------------------
+LINE ITEMS:
+--------------------------------------------------------------------------------
+1. EC2 Compute Instances (c5.2xlarge - Linux) ........ Qty 4  @ INR 18,750 = INR 75,000.00
+2. S3 Object Storage & Data Egress .................... Qty 1  @ INR 25,000 = INR 25,000.00
+3. RDS PostgreSQL Production Database Retainer ......... Qty 1  @ INR 25,000 = INR 25,000.00
+--------------------------------------------------------------------------------
+Subtotal:                                                           INR 125,000.00
+GST Tax (18%):                                                       INR  22,500.00
+--------------------------------------------------------------------------------
+TOTAL AMOUNT DUE:                                                   INR 147,500.00
+================================================================================
+Bank Transfer Details:
+Bank: HDFC Bank Ltd | Account: 50200012345678 | IFSC: HDFC0000240
+================================================================================

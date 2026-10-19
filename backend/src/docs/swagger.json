@@ -1,0 +1,137 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "ReconX-AI Autonomous Financial Reconciliation Platform API",
+    "version": "1.0.0",
+    "description": "Production-quality API for enterprise financial document ingestion, transaction normalization, GL mapping, multi-factor reconciliation, anomaly investigation, and human review."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5000",
+      "description": "Local Development Server"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/api/auth/register": {
+      "post": {
+        "summary": "Register a new company and administrative user",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email", "password", "firstName", "lastName", "companyName"],
+                "properties": {
+                  "email": { "type": "string" },
+                  "password": { "type": "string" },
+                  "firstName": { "type": "string" },
+                  "lastName": { "type": "string" },
+                  "companyName": { "type": "string" },
+                  "role": { "type": "string", "enum": ["ADMIN", "FINANCE_MANAGER", "FINANCE_ANALYST"] }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "201": { "description": "User and company registered" } }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "summary": "User authentication",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email", "password"],
+                "properties": {
+                  "email": { "type": "string" },
+                  "password": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": { "200": { "description": "JWT Auth Token & User Profile" } }
+      }
+    },
+    "/api/auth/me": {
+      "get": {
+        "summary": "Retrieve currently authenticated user session",
+        "responses": { "200": { "description": "Current user profile" } }
+      }
+    },
+    "/api/dashboard/stats": {
+      "get": {
+        "summary": "Get executive financial reconciliation dashboard statistics and KPI cards",
+        "responses": { "200": { "description": "Aggregated metrics, charts, and urgent tasks" } }
+      }
+    },
+    "/api/documents": {
+      "get": { "summary": "List financial documents with filters" },
+      "post": { "summary": "Upload invoice/receipt/statement document" }
+    },
+    "/api/bank-statements": {
+      "get": { "summary": "List uploaded bank statements" },
+      "post": { "summary": "Ingest bank statement and extract transactions" }
+    },
+    "/api/transactions": {
+      "get": { "summary": "Search, filter, and paginate normalized transactions" },
+      "post": { "summary": "Manually create financial transaction" }
+    },
+    "/api/gl-codes": {
+      "get": { "summary": "List general ledger codes" },
+      "post": { "summary": "Create custom GL code" }
+    },
+    "/api/reconciliation/run": {
+      "post": { "summary": "Execute batch multi-factor reconciliation process" }
+    },
+    "/api/reconciliation": {
+      "get": { "summary": "List reconciliation comparison results" }
+    },
+    "/api/reconciliation/{id}/approve": {
+      "post": { "summary": "Human approval of matched transactions" }
+    },
+    "/api/anomalies": {
+      "get": { "summary": "List detected financial anomalies" }
+    },
+    "/api/anomalies/{id}/resolve": {
+      "post": { "summary": "Resolve an anomaly with investigation notes" }
+    },
+    "/api/investigations": {
+      "get": { "summary": "List root cause investigations" },
+      "post": { "summary": "Initiate automated investigation for an anomaly" }
+    },
+    "/api/review-queue": {
+      "get": { "summary": "Get priority human review queue items" }
+    },
+    "/api/reports/reconciliation": {
+      "get": { "summary": "Reconciliation executive summary report" }
+    },
+    "/api/reports/export-csv": {
+      "get": { "summary": "Download dynamic CSV report" }
+    },
+    "/api/audit-logs": {
+      "get": { "summary": "Query immutable security and business audit trail" }
+    }
+  }
+}

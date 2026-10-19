@@ -1,0 +1,225 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Company {
+  id              String           @id @default(uuid())
+  name            String
+  industry        String
+  country         String
+  currency        String           @default("INR")
+  fiscalYear      String           @default("2026-2027")
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  users           User[]
+  documents       Document[]
+  transactions    Transaction[]
+  glCodes         GLCode[]
+  reconciliations Reconciliation[]
+  anomalies       Anomaly[]
+  investigations  Investigation[]
+  auditLogs       AuditLog[]
+
+  @@map("companies")
+}
+
+model User {
+  id              String           @id @default(uuid())
+  companyId       String
+  email           String           @unique
+  passwordHash    String
+  firstName       String
+  lastName        String
+  role            String           @default("FINANCE_ANALYST")
+  active          Boolean          @default(true)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  company         Company          @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  uploadedDocs    Document[]       @relation("UserUploadedDocs")
+  reviewedRecons  Reconciliation[] @relation("UserReviewedRecons")
+  assignedInvs    Investigation[]  @relation("UserAssignedInvestigations")
+  auditLogs       AuditLog[]
+
+  @@index([companyId])
+  @@map("users")
+}
+
+model Document {
+  id               String           @id @default(uuid())
+  companyId        String
+  uploadedById     String
+  fileName         String
+  originalName     String
+  filePath         String
+  fileType         String
+  documentType     String
+  fileSize         Int
+  processingStatus String           @default("UPLOADED")
+  extractedData    String?
+  uploadDate       DateTime         @default(now())
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  company          Company          @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  uploadedBy       User             @relation("UserUploadedDocs", fields: [uploadedById], references: [id])
+  transactions     Transaction[]
+
+  @@index([companyId])
+  @@index([processingStatus])
+  @@map("documents")
+}
+
+model GLCode {
+  id          String        @id @default(uuid())
+  companyId   String
+  code        String
+  name        String
+  description String?
+  category    String
+  active      Boolean       @default(true)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  company     Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+
+  @@unique([companyId, code])
+  @@index([companyId])
+  @@map("gl_codes")
+}
+
+model Transaction {
+  id                String            @id @default(uuid())
+  companyId         String
+  documentId        String?
+  transactionType   String            @default("DEBIT")
+  vendorName        String
+  amount            Float
+  currency          String            @default("INR")
+  transactionDate   DateTime
+  referenceNumber   String
+  description       String?
+  source            String
+  status            String            @default("UNMATCHED")
+  glCodeId          String?
+  glConfidence      Float?
+  glStatus          String?           @default("UNMAPPED")
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  company           Company           @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  document          Document?         @relation(fields: [documentId], references: [id], onDelete: SetNull)
+  glCode            GLCode?           @relation(fields: [glCodeId], references: [id], onDelete: SetNull)
+
+  sourceRecons      Reconciliation[]  @relation("SourceReconciliations")
+  targetRecons      Reconciliation[]  @relation("TargetReconciliations")
+  anomalies         Anomaly[]
+
+  @@index([companyId])
+  @@index([status])
+  @@index([vendorName])
+  @@index([referenceNumber])
+  @@index([transactionDate])
+  @@map("transactions")
+}
+
+model Reconciliation {
+  id                  String               @id @default(uuid())
+  companyId           String
+  sourceTransactionId String
+  targetTransactionId String
+  status              String               @default("UNMATCHED")
+  confidenceScore     Float                @default(0.0)
+  amountMatch         Boolean              @default(false)
+  vendorMatch         Boolean              @default(false)
+  dateMatch           Boolean              @default(false)
+  referenceMatch      Boolean              @default(false)
+  explanation         String
+  reviewedById        String?
+  reviewedAt          DateTime?
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+
+  company             Company              @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  sourceTransaction   Transaction          @relation("SourceReconciliations", fields: [sourceTransactionId], references: [id], onDelete: Cascade)
+  targetTransaction   Transaction          @relation("TargetReconciliations", fields: [targetTransactionId], references: [id], onDelete: Cascade)
+  reviewedBy          User?                @relation("UserReviewedRecons", fields: [reviewedById], references: [id], onDelete: SetNull)
+
+  @@index([companyId])
+  @@index([status])
+  @@map("reconciliations")
+}
+
+model Anomaly {
+  id                String          @id @default(uuid())
+  companyId         String
+  transactionId     String?
+  type              String
+  severity          String
+  title             String
+  description       String
+  status            String          @default("OPEN")
+  evidence          String?
+  recommendedAction String?
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+
+  company           Company         @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  transaction       Transaction?    @relation(fields: [transactionId], references: [id], onDelete: SetNull)
+  investigations    Investigation[]
+
+  @@index([companyId])
+  @@index([status])
+  @@index([severity])
+  @@map("anomalies")
+}
+
+model Investigation {
+  id             String              @id @default(uuid())
+  companyId      String
+  anomalyId      String
+  assignedToId   String?
+  status         String              @default("OPEN")
+  findings       String?
+  evidence       String?
+  recommendation String?
+  timeline       String?
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
+
+  company        Company             @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  anomaly        Anomaly             @relation(fields: [anomalyId], references: [id], onDelete: Cascade)
+  assignedTo     User?               @relation("UserAssignedInvestigations", fields: [assignedToId], references: [id], onDelete: SetNull)
+
+  @@index([companyId])
+  @@index([status])
+  @@map("investigations")
+}
+
+model AuditLog {
+  id            String    @id @default(uuid())
+  companyId     String
+  userId        String?
+  action        String
+  entity        String
+  entityId      String
+  previousValue String?
+  newValue      String?
+  ipAddress     String?
+  createdAt     DateTime  @default(now())
+
+  company       Company   @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  user          User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([companyId])
+  @@index([entity, entityId])
+  @@index([action])
+  @@map("audit_logs")
+}
