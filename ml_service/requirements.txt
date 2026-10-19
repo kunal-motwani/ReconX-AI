@@ -1,0 +1,39 @@
+# AI Agent for Finance - Dependencies
+# Core
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.4
+pydantic-settings==2.7.1
+python-dotenv==1.0.1
+python-multipart==0.0.20
+
+# Data Processing
+pandas==2.2.3
+numpy==1.26.4
+openpyxl==3.1.5
+
+# ML / NLP
+scikit-learn==1.6.1
+sentence-transformers==3.3.1
+
+# Document Extraction
+PyMuPDF==1.25.3
+python-docx==1.1.2
+pytesseract==0.3.13
+Pillow==11.1.0
+
+# Vector Store
+chromadb==0.6.3
+
+# LLM / HTTP
+httpx==0.28.1
+
+# Fuzzy Matching
+thefuzz[speedup]==0.22.1
+
+# Testing
+pytest==8.3.4
+pytest-asyncio==0.25.2
+
+# Utilities
+structlog==24.4.0

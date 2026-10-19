@@ -1,0 +1,20 @@
+ABC Technologies Pvt Ltd
+Invoice Number: INV-1023
+Date: 10-Aug-2026
+Due Date: 10-Sep-2026
+PO Number: PO-501
+
+Bill To:
+XYZ Corporation
+123 Business Park, Mumbai
+
+Description                  Qty    Unit Price    Amount
+Cloud Infrastructure          1     ₹80,000       ₹80,000
+Technical Support              1     ₹20,000       ₹20,000
+
+Subtotal: ₹1,00,000
+GST (18%): ₹18,000
+Total: ₹1,18,000
+
+Payment Terms: Net 30
+Bank: HDFC Bank, Account: 1234567890

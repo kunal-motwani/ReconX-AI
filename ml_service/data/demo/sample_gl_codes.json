@@ -1,0 +1,12 @@
+[
+  {
+    "code": "6201",
+    "name": "Cloud/Software",
+    "description": "Cloud infrastructure and software subscriptions"
+  },
+  {
+    "code": "7001",
+    "name": "Rent",
+    "description": "Office rent and lease payments"
+  }
+]
