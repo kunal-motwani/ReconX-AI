@@ -1,0 +1,116 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#0a0a0a] text-yellow-400 antialiased selection:bg-orange-500/30 selection:text-yellow-300;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11", "tnum";
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    transition: background-color 0.25s ease, color 0.25s ease, filter 0.3s ease;
+  }
+}
+
+/* 1. Accessibility Mode: Deuteranopia / Protanopia Safe (Okabe-Ito High-Contrast Cyan & Gold) */
+html[data-reconx-theme="COLORBLIND_SAFE"] body {
+  filter: hue-rotate(175deg) saturate(1.15) contrast(1.06);
+}
+
+/* 2. Accessibility Mode: Swiss Archival Daylight Paper Ledger */
+html[data-reconx-theme="SWISS_PAPER"] body {
+  filter: invert(0.94) hue-rotate(180deg) contrast(1.08);
+  background-color: #f4f1ea;
+}
+
+/* 3. Neuro-Inclusive / Dyslexia-Friendly Hyperlegible Typography Mode */
+html[data-dyslexia="true"] body,
+html[data-dyslexia="true"] .font-terminal,
+html[data-dyslexia="true"] .font-mono {
+  font-family: "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  letter-spacing: 0.035em !important;
+  word-spacing: 0.08em !important;
+  line-height: 1.65 !important;
+}
+
+/* Subtle Hardware Phosphor Grid & Scanline Texture */
+html[data-scanlines="true"] body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.012) 0px,
+    rgba(255, 255, 255, 0.012) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+/* Minimalist Black & Grey Backgrounds with Orange & Yellow Fonts */
+.bloomberg-panel {
+  background: #121212;
+  border: 1px solid #262626;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.85);
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bloomberg-panel:hover {
+  border-color: #383838;
+}
+
+.bloomberg-panel-amber {
+  background: #1a1a1a;
+  border: 1px solid #333333;
+}
+
+.bloomberg-ticker-bar {
+  background: #050505;
+  border-bottom: 1px solid #262626;
+}
+
+.font-terminal {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.text-orange-accent {
+  color: #f97316;
+}
+
+.text-yellow-accent {
+  color: #facc15;
+}
+
+.bg-grey-card {
+  background-color: #141414;
+}
+
+.border-grey-dark {
+  border-color: #282828;
+}
+
+/* Tactical Grid Background Utility */
+.terminal-grid-bg {
+  background-image: radial-gradient(rgba(249, 115, 22, 0.14) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Custom Black, Grey & Orange Scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #282828;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #f97316;
+}
