@@ -1220,18 +1220,21 @@ export async function handleAutonomousRequest<T>(
           const newRecon: Reconciliation = {
             id: `rec-custom-${Date.now().toString(36)}`,
             companyId: state.company.id,
-            invoiceTransactionId: invTx.id,
-            bankTransactionId: bankTx.id,
-            matchScore: customScenario === 'EXACT_MATCH' ? 0.991 : 0.875,
+            sourceTransactionId: invTx.id,
+            targetTransactionId: bankTx.id,
+            confidenceScore: customScenario === 'EXACT_MATCH' ? 0.991 : 0.875,
             status: customScenario === 'EXACT_MATCH' ? 'MATCHED' : 'AMOUNT_MISMATCH',
-            discrepancyAmount: differenceAmt,
+            amountMatch: customScenario === 'EXACT_MATCH',
+            vendorMatch: true,
+            dateMatch: true,
+            referenceMatch: true,
             explanation:
               customScenario === 'EXACT_MATCH'
                 ? `Exact 5-Factor Vector Match (99.1%) for newly uploaded dataset ${fileName} (${finalVendor}).`
                 : `Uploaded dataset ${fileName} flagged ₹${differenceAmt} variance between Invoice (₹${finalAmount}) and Bank UTR (₹${bankSettledAmount}).`,
             createdAt: nowIso,
-            invoiceTransaction: invTx,
-            bankTransaction: bankTx,
+            sourceTransaction: invTx,
+            targetTransaction: bankTx,
           };
           state.reconciliations = [newRecon, ...state.reconciliations];
 
